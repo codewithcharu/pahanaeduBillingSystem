@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bill Details</title>
+</head>
+<body>
+<h2>Bill Details</h2>
+
+<p><strong>User:</strong> <span th:text="${bill.user.fullName}"></span></p>
+<p><strong>Date:</strong> <span th:text="${bill.billDate}"></span></p>
+<p><strong>Total:</strong> Rs. <span th:text="${bill.totalAmount}"></span></p>
+
+<hr/>
+<h3>Items:</h3>
+<table border="1">
+    <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Unit Price</th>
+        <th>Subtotal</th>
+    </tr>
+    <tr th:each="item : ${bill.items}">
+        <td th:text="${item.item.name}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td th:text="${item.unitPrice}"></td>
+        <td th:text="${item.subtotal}"></td>
+    </tr>
+</table>
+
+<br/>
+<a th:href="@{'/bills/' + ${bill.id} + '/pdf'}" target="_blank">📄 Download PDF</a> |
+<a th:href="@{'/bills/' + ${bill.id} + '/print'}" target="_blank">🖨️ Print</a> |
+<a href="/bills">⬅ Back</a>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px;
+            color: #333;
+        }
+        h1 { 
+            color: #1873b0; 
+            text-align: center;
+            border-bottom: 2px solid #1873b0;
+            padding-bottom: 10px;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        .bill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        table { 
+            width: 100%;
+            border-collapse: collapse; 
+            margin: 20px 0;
+        }
+        th, td { 
+            border: 1px solid #ddd; 
+            padding: 12px; 
+            text-align: left;
+        }
+        th { 
+            background-color: #f8f9fa; 
+            font-weight: bold;
+        }
+        .total {
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>INVOICE</h1>
+    </div>
+    
+    <div class="bill-info">
+        <div>
+            <strong>Bill ID:</strong> #<span th:text="${bill.id}"></span><br/>
+            <strong>Date:</strong> <span th:text="${bill.billDate != null ? #temporals.format(bill.billDate, 'dd/MM/yyyy HH:mm') : 'N/A'}"></span>
+        </div>
+        <div>
+            <strong>Customer:</strong><br/>
+            <span th:text="${bill.user.fullName}"></span><br/>
+            <span th:text="${bill.user.username}"></span>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="billItem : ${bill.items}">
+                <td th:text="${billItem.item.name}"></td>
+                <td th:text="${billItem.quantity}"></td>
+                <td>LKR <span th:text="${#numbers.formatDecimal(billItem.unitPrice, 1, 2)}"></span></td>
+                <td>LKR <span th:text="${#numbers.formatDecimal(billItem.subtotal, 1, 2)}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="total">
+        <strong>Total Amount: LKR <span th:text="${#numbers.formatDecimal(bill.totalAmount, 1, 2)}"></span></strong>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center; color: #666; font-size: 12px;">
+        <p>Thank you for your business!</p>
+        <p>Generated on: <span th:text="${#temporals.format(#temporals.createNow(), 'dd/MM/yyyy HH:mm')}"></span></p>
+    </div>
+</body>
+</html>

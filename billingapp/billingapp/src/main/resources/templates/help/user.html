@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Help Guide - Billing System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .help-hero {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 3rem 0;
+        }
+        .help-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        .help-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .step-number {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #4facfe;
+            margin-bottom: 1rem;
+        }
+        .instruction-box {
+            background: #f8f9fa;
+            border-left: 4px solid #4facfe;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .warning-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .breadcrumb-custom {
+            background: transparent;
+            padding: 0;
+        }
+        .breadcrumb-custom .breadcrumb-item + .breadcrumb-item::before {
+            content: ">";
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-calculator me-2"></i>Billing System
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/"><i class="fas fa-home me-1"></i>Home</a>
+                <a class="nav-link" href="/help"><i class="fas fa-question-circle me-1"></i>Help</a>
+                <a class="nav-link" href="/profile"><i class="fas fa-user me-1"></i>Profile</a>
+                <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-custom">
+                <li class="breadcrumb-item"><a href="/help"><i class="fas fa-home me-1"></i>Help</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User Guide</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="help-hero">
+        <div class="container text-center">
+            <h1 class="display-5 fw-bold mb-3">
+                <i class="fas fa-user me-3"></i>User Help Guide
+            </h1>
+            <p class="lead">Learn how to use the Billing System effectively. Step-by-step instructions for all user features.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <!-- Quick Navigation -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card help-card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <i class="fas fa-list me-2 text-primary"></i>Quick Navigation
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="#getting-started" class="btn btn-outline-primary w-100 mb-2">
+                                    <i class="fas fa-play me-2"></i>Getting Started
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#profile-management" class="btn btn-outline-primary w-100 mb-2">
+                                    <i class="fas fa-user me-2"></i>Profile Management
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#billing-features" class="btn btn-outline-primary w-100 mb-2">
+                                    <i class="fas fa-file-invoice me-2"></i>Billing Features
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#troubleshooting" class="btn btn-outline-primary w-100 mb-2">
+                                    <i class="fas fa-tools me-2"></i>Troubleshooting
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Getting Started Section -->
+        <section id="getting-started">
+            <div class="card help-card">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="fas fa-rocket me-2 text-success"></i>Getting Started
+                    </h3>
+                    
+                    <div class="row align-items-center mb-4">
+                        <div class="col-auto">
+                            <div class="step-number">1</div>
+                        </div>
+                        <div class="col">
+                            <h5>Login to Your Account</h5>
+                            <p>Access the system using your username and password provided by your administrator.</p>
+                            <div class="instruction-box">
+                                <strong>How to login:</strong>
+                                <ul class="mb-0 mt-2">
+                                    <li>Navigate to the login page</li>
+                                    <li>Enter your username and password</li>
+                                    <li>Click the "Login" button</li>
+                                    <li>You'll be redirected to your dashboard</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center mb-4">
+                        <div class="col-auto">
+                            <div class="step-number">2</div>
+                        </div>
+                        <div class="col">
+                            <h5>Explore the Dashboard</h5>
+                            <p>Familiarize yourself with the main navigation and available features.</p>
+                            <div class="instruction-box">
+                                <strong>Main navigation includes:</strong>
+                                <ul class="mb-0 mt-2">
+                                    <li><strong>Home:</strong> Return to main dashboard</li>
+                                    <li><strong>Profile:</strong> Manage your personal information</li>
+                                    <li><strong>Bills:</strong> View your billing history</li>
+                                    <li><strong>Help:</strong> Access this help guide</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="step-number">3</div>
+                        </div>
+                        <div class="col">
+                            <h5>Update Your Profile</h5>
+                            <p>Complete your profile information to ensure accurate billing and communication.</p>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb me-2"></i>
+                                <strong>Tip:</strong> Keep your contact information up-to-date for important notifications.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Management Section -->
+        <section id="profile-management">
+            <div class="card help-card">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="fas fa-user-edit me-2 text-info"></i>Profile Management
+                    </h3>
+                    
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h5>Managing Your Profile</h5>
+                            <p>Your profile contains important information that affects your billing and account management.</p>
+                            
+                            <div class="instruction-box">
+                                <strong>Profile Information:</strong>
+                                <ul>
+                                    <li><strong>Username:</strong> Your unique login identifier (cannot be changed)</li>
+                                    <li><strong>Full Name:</strong> Your complete name as it appears on bills</li>
+                                    <li><strong>Email:</strong> Contact email for notifications and support</li>
+                                    <li><strong>Phone:</strong> Contact number for urgent communications</li>
+                                </ul>
+                            </div>
+
+                            <h6 class="mt-4">How to Update Your Profile:</h6>
+                            <ol>
+                                <li>Click on "Profile" in the main navigation</li>
+                                <li>Click "Edit Profile" button</li>
+                                <li>Update the desired fields</li>
+                                <li>Click "Save Changes" to confirm</li>
+                            </ol>
+
+                            <div class="warning-box">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>Important:</strong> Your username and user ID cannot be changed. These are unique identifiers for your account.
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                    <h6>Password Management</h6>
+                                    <p class="small">Change your password regularly for security</p>
+                                    <a href="/change-password" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-lock me-2"></i>Change Password
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Billing Features Section -->
+        <section id="billing-features">
+            <div class="card help-card">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="fas fa-file-invoice-dollar me-2 text-warning"></i>Billing Features
+                    </h3>
+                    
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h5>Understanding Your Bills</h5>
+                            <p>As a user, you can view and manage your personal billing information.</p>
+                            
+                            <div class="instruction-box">
+                                <strong>What You Can Do:</strong>
+                                <ul>
+                                    <li><strong>View Bills:</strong> See all your billing history</li>
+                                    <li><strong>Bill Details:</strong> Examine individual bill items and totals</li>
+                                    <li><strong>Print Bills:</strong> Generate printable versions of your bills</li>
+                                    <li><strong>Download PDFs:</strong> Save bills as PDF files</li>
+                                </ul>
+                            </div>
+
+                            <h6 class="mt-4">Accessing Your Bills:</h6>
+                            <ol>
+                                <li>Navigate to the "Bills" section</li>
+                                <li>View your complete billing history</li>
+                                <li>Click on any bill to see detailed information</li>
+                                <li>Use action buttons to print or download</li>
+                            </ol>
+
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb me-2"></i>
+                                <strong>Tip:</strong> You can only view bills associated with your account. This ensures privacy and security.
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <h6>Bill Search</h6>
+                                    <p class="small">Find specific bills by date or amount</p>
+                                    <p class="small text-muted">(Coming soon)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting Section -->
+        <section id="troubleshooting">
+            <div class="card help-card">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="fas fa-tools me-2 text-danger"></i>Troubleshooting
+                    </h3>
+                    
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h5>Common Issues</h5>
+                            
+                            <div class="accordion" id="troubleshootingAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                            Can't Login?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#troubleshootingAccordion">
+                                        <div class="accordion-body">
+                                            <ul>
+                                                <li>Check your username and password</li>
+                                                <li>Ensure Caps Lock is off</li>
+                                                <li>Contact admin if locked out</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                            Can't View Bills?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                        <div class="accordion-body">
+                                            <ul>
+                                                <li>Ensure you're logged in</li>
+                                                <li>Check if bills exist for your account</li>
+                                                <li>Contact admin for assistance</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                            Profile Update Issues?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                        <div class="accordion-body">
+                                            <ul>
+                                                <li>Ensure all required fields are filled</li>
+                                                <li>Check email format is valid</li>
+                                                <li>Try refreshing the page</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <h5>Getting Help</h5>
+                            <p>If you encounter issues not covered here:</p>
+                            
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-headset me-2"></i>Contact Support</h6>
+                                    <ul class="mb-0">
+                                        <li>Reach out to your system administrator</li>
+                                        <li>Provide specific error messages</li>
+                                        <li>Include steps to reproduce the issue</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-3">
+                                <a href="/help/pdf" target="_blank" class="btn btn-outline-primary w-100">
+                                    <i class="fas fa-file-pdf me-2"></i>Download Complete Guide
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Reference -->
+        <div class="card help-card">
+            <div class="card-body text-center">
+                <h4 class="card-title">
+                    <i class="fas fa-bookmark me-2 text-success"></i>Quick Reference
+                </h4>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <i class="fas fa-user fa-2x text-primary mb-2"></i>
+                            <h6>Profile</h6>
+                            <p class="small">Manage your information</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <i class="fas fa-file-invoice fa-2x text-success mb-2"></i>
+                            <h6>Bills</h6>
+                            <p class="small">View your billing history</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <i class="fas fa-print fa-2x text-warning mb-2"></i>
+                            <h6>Print</h6>
+                            <p class="small">Generate printable bills</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <i class="fas fa-download fa-2x text-info mb-2"></i>
+                            <h6>Download</h6>
+                            <p class="small">Save bills as PDF</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light text-center py-4 mt-5">
+        <div class="container">
+            <p>&copy; 2024 Billing System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to Billing System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .welcome-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .welcome-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 20px 20px 0 0;
+        padding: 2rem;
+        text-align: center;
+    }
+    .btn-action {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 12px 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        margin: 10px;
+    }
+    .btn-action:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+    .user-info {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        backdrop-filter: blur(10px);
+    }
+    .admin-badge {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .user-badge {
+        background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100">
+      <div class="col-md-10 col-lg-8">
+        <div class="welcome-container">
+          <div class="welcome-header">
+            <i class="fas fa-book fa-3x mb-3"></i>
+            <h1 class="mb-2">Welcome to Pahana Edu Bookshop Billing System</h1>
+            <p class="mb-0">Manage your billing operations efficiently</p>
+          </div>
+          
+          <div class="p-4">
+            <!-- User Information Section -->
+            <div th:if="${#authentication.authenticated}" class="user-info text-center mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="text-white mb-1">Welcome back!</h6>
+                  <p class="text-white-50 mb-0" th:text="${#authentication.name}">User</p>
+                </div>
+                <div>
+                  <span th:if="${#strings.contains(#authentication.authorities, 'ROLE_ADMIN') or #strings.contains(#authentication.authorities, 'ADMIN')}" 
+                        class="admin-badge">
+                    <i class="fas fa-user-shield me-1"></i>ADMIN
+                  </span>
+                  <span th:unless="${#strings.contains(#authentication.authorities, 'ROLE_ADMIN') or #strings.contains(#authentication.authorities, 'ADMIN')}" 
+                        class="user-badge">
+                    <i class="fas fa-user me-1"></i>USER
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="text-center">
+              <!-- Admin-specific buttons -->
+              <div th:if="${#strings.contains(#authentication.authorities, 'ROLE_ADMIN') or #strings.contains(#authentication.authorities, 'ADMIN')}" 
+                   class="row mb-3">
+                <div class="col-md-6 mb-2">
+                  <a href="/admin/dashboard" class="btn btn-action w-100">
+                    <i class="fas fa-tachometer-alt me-2"></i>Admin Dashboard
+                  </a>
+                </div>
+                <div class="col-md-6 mb-2">
+                  <a href="/admin/users" class="btn btn-action w-100">
+                    <i class="fas fa-users me-2"></i>Manage Users
+                  </a>
+                </div>
+              </div>
+
+              <!-- General buttons for all users -->
+              <div class="row mb-3">
+                <div class="col-md-6 mb-2">
+                  <a href="/bills" class="btn btn-action w-100">
+                    <i class="fas fa-file-invoice me-2"></i>View Bills
+                  </a>
+                </div>
+                <div class="col-md-6 mb-2">
+                  <a href="/help" class="btn btn-action w-100">
+                    <i class="fas fa-question-circle me-2"></i>Help & Documentation
+                  </a>
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <div class="col-md-6 mb-2">
+                  <a href="/swagger-ui/index.html" class="btn btn-action w-100">
+                    <i class="fas fa-code me-2"></i>API Documentation
+                  </a>
+                </div>
+                <div class="col-md-6 mb-2">
+                  <a href="/profile" class="btn btn-action w-100">
+                    <i class="fas fa-user me-2"></i>My Profile
+                  </a>
+                </div>
+              </div>
+              
+
+
+              <!-- Logout button for authenticated users -->
+              <div th:if="${#authentication.authenticated}" class="mt-4">
+                <a href="/logout" class="btn btn-danger btn-lg">
+                  <i class="fas fa-sign-out-alt me-2"></i>Logout
+                </a>
+              </div>
+
+              <!-- Login button for unauthenticated users -->
+              <div th:unless="${#authentication.authenticated}" class="mt-4">
+                <a href="/login" class="btn btn-success btn-lg">
+                  <i class="fas fa-sign-in-alt me-2"></i>Login
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Check if admin setup is required
+    fetch('/api/setup/status')
+      .then(response => response.json())
+      .then(data => {
+        if (data.setupRequired) {
+          window.location.href = '/setup';
+        }
+      })
+      .catch(error => {
+        console.error('Error checking setup status:', error);
+      });
+
+    // Show logout success message if present
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('logout') === 'success') {
+      // You can add a toast notification here if needed
+      console.log('Logout successful');
+    }
+  </script>
+</body>
+</html>
